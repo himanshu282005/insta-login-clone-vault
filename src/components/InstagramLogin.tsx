@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, Instagram } from 'lucide-react';
 
 const InstagramLogin = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -83,9 +82,16 @@ const InstagramLogin = () => {
         <div className="bg-white border border-gray-300 px-10 py-8 mb-4">
           {/* Instagram Logo */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 bg-clip-text text-transparent">
-              Instagram
-            </h1>
+            <Instagram 
+              size={64} 
+              className="mx-auto text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 bg-clip-text"
+              style={{
+                background: 'linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}
+            />
           </div>
 
           {!isLogin && (
