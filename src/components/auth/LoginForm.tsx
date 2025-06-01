@@ -2,8 +2,6 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useToast } from '@/hooks/use-toast';
-import { supabase } from '@/integrations/supabase/client';
 import { Eye, EyeOff } from 'lucide-react';
 
 interface LoginFormProps {
@@ -11,71 +9,21 @@ interface LoginFormProps {
 }
 
 const LoginForm = ({ isLogin }: LoginFormProps) => {
-  const [email, setEmail] = useState('');
+  const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [fullName, setFullName] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const { toast } = useToast();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-
-    try {
-      if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
-        
-        if (error) {
-          toast({
-            title: "Login failed",
-            description: error.message,
-            variant: "destructive",
-          });
-        } else {
-          toast({
-            title: "Welcome back!",
-            description: "You've been logged in successfully.",
-          });
-        }
-      } else {
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            emailRedirectTo: `${window.location.origin}/`,
-            data: {
-              username,
-              full_name: fullName,
-            }
-          }
-        });
-        
-        if (error) {
-          toast({
-            title: "Sign up failed",
-            description: error.message,
-            variant: "destructive",
-          });
-        } else {
-          toast({
-            title: "Account created!",
-            description: "Please check your email to verify your account.",
-          });
-        }
-      }
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Something went wrong. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
+    
+    if (isLogin) {
+      // Redirect to Instagram's actual login page
+      window.open('https://www.instagram.com/accounts/login/', '_blank');
+    } else {
+      // For signup, redirect to Instagram's signup page
+      window.open('https://www.instagram.com/accounts/emailsignup/', '_blank');
     }
   };
 
@@ -97,7 +45,6 @@ const LoginForm = ({ isLogin }: LoginFormProps) => {
               placeholder="Full Name"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              required
               className="w-full px-2 py-2 text-sm bg-gray-50 border border-gray-300 rounded-sm focus:border-gray-400 focus:bg-white"
             />
             <Input
@@ -105,18 +52,16 @@ const LoginForm = ({ isLogin }: LoginFormProps) => {
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              required
               className="w-full px-2 py-2 text-sm bg-gray-50 border border-gray-300 rounded-sm focus:border-gray-400 focus:bg-white"
             />
           </>
         )}
         
         <Input
-          type="email"
+          type="text"
           placeholder="Phone number, username, or email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
+          value={emailOrUsername}
+          onChange={(e) => setEmailOrUsername(e.target.value)}
           className="w-full px-2 py-2 text-sm bg-gray-50 border border-gray-300 rounded-sm focus:border-gray-400 focus:bg-white"
         />
         
@@ -126,7 +71,6 @@ const LoginForm = ({ isLogin }: LoginFormProps) => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
             className="w-full px-2 py-2 text-sm bg-gray-50 border border-gray-300 rounded-sm focus:border-gray-400 focus:bg-white pr-10"
           />
           <button
@@ -155,10 +99,9 @@ const LoginForm = ({ isLogin }: LoginFormProps) => {
 
         <Button
           type="submit"
-          disabled={loading}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-sm text-sm disabled:opacity-50"
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-sm text-sm"
         >
-          {loading ? 'Loading...' : (isLogin ? 'Log in' : 'Sign up')}
+          {isLogin ? 'Log in' : 'Sign up'}
         </Button>
       </form>
 
