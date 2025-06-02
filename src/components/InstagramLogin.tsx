@@ -8,9 +8,9 @@ const InstagramLogin = () => {
   const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center px-4 relative">
-      {/* Language selector */}
-      <div className="absolute top-16 left-1/2 transform -translate-x-1/2">
+    <div className="min-h-screen bg-gray-900 flex flex-col items-center px-4 relative">
+      {/* Language selector moved to top */}
+      <div className="w-full flex justify-center pt-4 pb-8">
         <div className="flex items-center text-gray-400 text-sm">
           <span>English (UK)</span>
           <svg className="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
@@ -19,24 +19,25 @@ const InstagramLogin = () => {
         </div>
       </div>
 
-      <div className="w-full max-w-sm">
+      {/* Main content centered */}
+      <div className="flex-1 flex flex-col items-center justify-center w-full max-w-sm">
         <InstagramLogo />
         <LoginForm isLogin={isLogin} />
         
         {/* Switch between Login/Signup */}
-        <div className="mt-8 text-center">
+        <div className="mt-8 w-full">
           <AuthToggle 
             isLogin={isLogin} 
             onToggle={() => setIsLogin(!isLogin)} 
           />
         </div>
+      </div>
 
-        {/* Meta branding */}
-        <div className="text-center mt-16">
-          <div className="flex items-center justify-center text-gray-500 text-sm font-medium">
-            <span className="mr-2">∞</span>
-            <span>Meta</span>
-          </div>
+      {/* Meta branding at bottom */}
+      <div className="pb-8">
+        <div className="flex items-center justify-center text-gray-500 text-sm font-medium">
+          <span className="mr-2">∞</span>
+          <span>Meta</span>
         </div>
       </div>
     </div>
