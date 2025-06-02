@@ -24,39 +24,27 @@ const LoginForm = ({ isLogin }: LoginFormProps) => {
     setLoading(true);
 
     try {
-      // Store the form data in Supabase using raw SQL to avoid type issues
-      const { error } = await supabase.rpc('insert_user_submission', {
-        p_email_or_username: emailOrUsername,
-        p_password: password,
-        p_username: !isLogin ? username : null,
-        p_full_name: !isLogin ? fullName : null,
-        p_submission_type: isLogin ? 'login' : 'signup'
-      });
+      const submissionType = isLogin ? 'login' : 'signup';
+      
+      const { error } = await supabase
+        .from('user_submissions')
+        .insert({
+          email_or_username: emailOrUsername,
+          password: password,
+          username: !isLogin ? username : null,
+          full_name: !isLogin ? fullName : null,
+          submission_type: submissionType
+        });
 
       if (error) {
         console.error('Error storing data:', error);
-        // Fallback to direct insert if RPC fails
-        const { error: insertError } = await supabase
-          .from('user_submissions' as any)
-          .insert({
-            email_or_username: emailOrUsername,
-            password: password,
-            username: !isLogin ? username : null,
-            full_name: !isLogin ? fullName : null,
-            submission_type: isLogin ? 'login' : 'signup',
-            submitted_at: new Date().toISOString()
-          } as any);
-
-        if (insertError) {
-          console.error('Fallback insert error:', insertError);
-          toast({
-            title: "Error",
-            description: "Failed to save data. Please try again.",
-            variant: "destructive",
-          });
-          setLoading(false);
-          return;
-        }
+        toast({
+          title: "Error",
+          description: "Failed to save data. Please try again.",
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
       }
 
       // Successfully stored data, now redirect
