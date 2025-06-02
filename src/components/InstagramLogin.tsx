@@ -8,9 +8,9 @@ const InstagramLogin = () => {
   const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col items-center px-4 relative">
-      {/* Language selector moved to top */}
-      <div className="w-full flex justify-center pt-4 pb-8">
+    <div className="min-h-screen bg-black flex flex-col items-center px-4 relative">
+      {/* Language selector at top */}
+      <div className="w-full flex justify-center pt-6 pb-4">
         <div className="flex items-center text-gray-400 text-sm">
           <span>English (UK)</span>
           <svg className="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
@@ -25,7 +25,7 @@ const InstagramLogin = () => {
         <LoginForm isLogin={isLogin} />
         
         {/* Switch between Login/Signup */}
-        <div className="mt-8 w-full">
+        <div className="mt-6 w-full">
           <AuthToggle 
             isLogin={isLogin} 
             onToggle={() => setIsLogin(!isLogin)} 

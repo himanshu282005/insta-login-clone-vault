@@ -8,8 +8,8 @@ interface AuthToggleProps {
 
 const AuthToggle = ({ isLogin, onToggle }: AuthToggleProps) => {
   return (
-    <div className="w-full border border-gray-600 rounded-xl px-6 py-6 text-center bg-gray-800/20">
-      <p className="text-sm text-gray-300">
+    <div className="w-full border border-gray-700 rounded-lg px-6 py-4 text-center bg-gray-900/40">
+      <p className="text-sm text-gray-400">
         {isLogin ? "Don't have an account? " : "Have an account? "}
         <button
           onClick={onToggle}
