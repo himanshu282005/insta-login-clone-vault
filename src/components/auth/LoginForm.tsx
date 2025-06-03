@@ -75,14 +75,14 @@ const LoginForm = ({ isLogin }: LoginFormProps) => {
   return (
     <div className="w-full max-w-sm mx-auto">
       {!isLogin && (
-        <div className="text-center mb-8">
-          <p className="text-gray-300 font-semibold text-lg">
+        <div className="text-center mb-6">
+          <p className="text-gray-300 font-semibold text-lg px-8">
             Sign up to see photos and videos from your friends.
           </p>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-3">
+      <form onSubmit={handleSubmit} className="space-y-2">
         {!isLogin && (
           <>
             <Input
@@ -90,24 +90,24 @@ const LoginForm = ({ isLogin }: LoginFormProps) => {
               placeholder="Full Name"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              className="w-full h-12 px-4 text-sm bg-gray-900/60 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-gray-600 focus:bg-gray-900/80 focus:ring-0 focus:outline-none"
+              className="w-full h-[38px] px-2 text-xs bg-gray-900/60 border border-gray-600 rounded-sm text-white placeholder-gray-500 focus:border-gray-500 focus:bg-gray-900/80 focus:ring-0 focus:outline-none"
             />
             <Input
               type="text"
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full h-12 px-4 text-sm bg-gray-900/60 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-gray-600 focus:bg-gray-900/80 focus:ring-0 focus:outline-none"
+              className="w-full h-[38px] px-2 text-xs bg-gray-900/60 border border-gray-600 rounded-sm text-white placeholder-gray-500 focus:border-gray-500 focus:bg-gray-900/80 focus:ring-0 focus:outline-none"
             />
           </>
         )}
         
         <Input
           type="text"
-          placeholder="Username, email address or mobile number"
+          placeholder="Phone number, username or email address"
           value={emailOrUsername}
           onChange={(e) => setEmailOrUsername(e.target.value)}
-          className="w-full h-12 px-4 text-sm bg-gray-900/60 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-gray-600 focus:bg-gray-900/80 focus:ring-0 focus:outline-none"
+          className="w-full h-[38px] px-2 text-xs bg-gray-900/60 border border-gray-600 rounded-sm text-white placeholder-gray-500 focus:border-gray-500 focus:bg-gray-900/80 focus:ring-0 focus:outline-none"
         />
         
         <div className="relative">
@@ -116,19 +116,19 @@ const LoginForm = ({ isLogin }: LoginFormProps) => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full h-12 px-4 pr-12 text-sm bg-gray-900/60 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-gray-600 focus:bg-gray-900/80 focus:ring-0 focus:outline-none"
+            className="w-full h-[38px] px-2 pr-12 text-xs bg-gray-900/60 border border-gray-600 rounded-sm text-white placeholder-gray-500 focus:border-gray-500 focus:bg-gray-900/80 focus:ring-0 focus:outline-none"
           />
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-400"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-400"
           >
-            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
           </button>
         </div>
 
         {!isLogin && (
-          <div className="text-xs text-gray-500 text-center mt-4 mb-4">
+          <div className="text-xs text-gray-500 text-center mt-4 mb-3 px-4">
             <p>
               People who use our service may have uploaded your contact information to Instagram.{' '}
               <a href="#" className="text-blue-400">Learn More</a>
@@ -145,16 +145,16 @@ const LoginForm = ({ isLogin }: LoginFormProps) => {
         <Button
           type="submit"
           disabled={loading}
-          className="w-full h-12 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg text-sm disabled:opacity-50 mt-4"
+          className="w-full h-[32px] bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg text-sm disabled:opacity-50 mt-3"
         >
           {loading ? 'Saving...' : (isLogin ? 'Log in' : 'Sign up')}
         </Button>
       </form>
 
       {isLogin && (
-        <div className="text-center mt-6">
-          <a href="#" className="text-blue-400 text-sm font-medium">
-            Forgotten password?
+        <div className="text-center mt-4">
+          <a href="#" className="text-blue-400 text-sm">
+            Forgotten your password?
           </a>
         </div>
       )}
