@@ -5,27 +5,28 @@ const InstagramLogo = () => {
   return (
     <div className="text-center mb-8">
       <div className="inline-block">
-        {/* Instagram official camera icon with gradient */}
-        <div className="w-16 h-16 mx-auto relative">
+        {/* Instagram square camera icon with gradient */}
+        <div className="w-20 h-20 mx-auto relative">
           <div 
-            className="w-full h-full rounded-2xl flex items-center justify-center relative overflow-hidden"
+            className="w-full h-full rounded-3xl flex items-center justify-center relative overflow-hidden"
             style={{
               background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)'
             }}
           >
             {/* Camera icon */}
             <svg 
-              className="w-8 h-8 text-white" 
-              fill="none" 
+              className="w-12 h-12 text-white" 
+              fill="currentColor" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
+              strokeWidth="0"
             >
-              {/* Camera body */}
-              <rect x="3" y="6" width="18" height="12" rx="2" ry="2" strokeWidth="2" fill="none"/>
-              {/* Camera lens */}
-              <circle cx="12" cy="12" r="3" strokeWidth="2" fill="none"/>
-              {/* Flash */}
-              <circle cx="16.5" cy="8.5" r="1" fill="currentColor" stroke="none"/>
+              {/* Outer circle (camera body) */}
+              <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" strokeWidth="1.5"/>
+              {/* Inner circle (lens) */}
+              <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="1.5"/>
+              {/* Flash dot */}
+              <circle cx="16.5" cy="7.5" r="1.2" fill="currentColor"/>
             </svg>
           </div>
         </div>
