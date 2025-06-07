@@ -23,8 +23,8 @@ const InstagramLogo = () => {
             >
               {/* Outer square (camera body) */}
               <rect x="4" y="4" width="16" height="16" rx="3" ry="3" fill="none" stroke="currentColor"/>
-              {/* Inner circle (lens) - increased radius from 4 to 5.5 */}
-              <circle cx="12" cy="12" r="5.5" fill="none" stroke="currentColor"/>
+              {/* Inner circle (lens) - increased radius to 6.5 to be closer to boundary */}
+              <circle cx="12" cy="12" r="6.5" fill="none" stroke="currentColor"/>
               {/* Flash dot */}
               <circle cx="16.5" cy="7.5" r="1.2" fill="currentColor"/>
             </svg>
