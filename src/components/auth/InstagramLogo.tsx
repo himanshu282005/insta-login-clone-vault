@@ -10,7 +10,7 @@ const InstagramLogo = () => {
           <img 
             src="/lovable-uploads/c6781daf-720b-4469-8662-a4740ca8fd17.png" 
             alt="Instagram" 
-            className="w-full h-full object-contain border-2 border-gray-300 rounded-lg"
+            className="w-full h-full object-contain border-2 border-gray-300 rounded-full"
           />
         </div>
       </div>
